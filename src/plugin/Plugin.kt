@@ -1,11 +1,12 @@
 package plugin
 
 import scape.editor.fs.io.RSBuffer
+import scape.editor.gui.plugin.IPlugin
 import scape.editor.gui.plugin.PluginDescriptor
-import scape.editor.gui.plugin.extension.config.ConfigExtension
+import scape.editor.gui.plugin.extension.ConfigExtension
 
 @PluginDescriptor(name = "Vanilla 317 Varbit Plugin", authors = ["Nshusa"], version = "1.1.0")
-class Plugin : ConfigExtension() {
+class Plugin : ConfigExtension(), IPlugin {
 
     private var high: Int = 0
     private var low: Int = 0
