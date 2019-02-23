@@ -10,7 +10,6 @@ import scape.editor.fx.TupleCellFactory
 import scape.editor.gui.App
 import scape.editor.gui.controller.BaseController
 import scape.editor.gui.event.LoadCacheEvent
-import scape.editor.gui.event.SaveVarbitEvent
 import scape.editor.gui.model.KeyModel
 import scape.editor.gui.model.NamedValueModel
 import scape.editor.gui.model.ValueModel
@@ -98,8 +97,6 @@ class Controller : BaseController() {
     fun onSave() {
         try {
             val archive = App.fs.getArchive(RSArchive.CONFIG_ARCHIVE)
-            PluginManager.post(SaveVarbitEvent(this.currentPlugin, archive, this.indexes))
-
             val currentPlugin = this.currentPlugin
 
             if (currentPlugin is ConfigExtension) {
