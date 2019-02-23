@@ -3,8 +3,25 @@
     -fx-font-size: 12;
 }
 
+.label {
+    -fx-text-fill: gray;
+}
+
 #title {
     -fx-font-size: 16;
+}
+
+.cod-gray {
+    -fx-background-color : #121212;
+}
+
+.check-box {
+    -fx-text-fill: white;
+}
+
+/* align table column text center */
+.table-column {
+  -fx-alignment: CENTER;
 }
 
 /* search bar */
@@ -97,8 +114,24 @@
     -fx-padding:0;
 }
 
+.context-menu {
+	-fx-background-color: #333333;
+}
+
 .white {
     -fx-fill: white;
+}
+
+.menu-item {
+	-fx-background-color: #333333;
+}
+
+.menu-item:hover {
+	-fx-background-color: #292929;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
 }
 
 *.scroll-bar:horizontal {

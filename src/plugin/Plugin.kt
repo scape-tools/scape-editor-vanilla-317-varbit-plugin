@@ -1,11 +1,11 @@
 package plugin
 
 import scape.editor.fs.io.RSBuffer
-import scape.editor.gui.plugin.Plugin
+import scape.editor.gui.plugin.PluginDescriptor
 import scape.editor.gui.plugin.extension.config.VarbitExtension
 
-@Plugin(name = "Vanilla 317 Varbit Plugin", authors = ["Nshusa"], version = "1.1.0")
-class VarbitPlugin : VarbitExtension() {
+@PluginDescriptor(name = "Vanilla 317 Varbit Plugin", authors = ["Nshusa"], version = "1.1.0")
+class Plugin : VarbitExtension() {
 
     private var high: Int = 0
     private var low: Int = 0
@@ -46,11 +46,11 @@ class VarbitPlugin : VarbitExtension() {
     }
 
     override fun fxml(): String {
-        return "VarbitScene.fxml"
+        return "scene.fxml"
     }
 
     override fun stylesheets(): Array<String> {
-        return arrayOf("css/style.css", "css/layout.css", "css/theme.css")
+        return arrayOf("css/style.css")
     }
 
     override fun applicationIcon(): String {

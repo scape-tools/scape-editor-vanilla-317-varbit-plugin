@@ -10,16 +10,17 @@ import scape.editor.fx.TupleCellFactory
 import scape.editor.gui.App
 import scape.editor.gui.controller.BaseController
 import scape.editor.gui.event.LoadCacheEvent
-import scape.editor.gui.event.LoadVarbitEvent
 import scape.editor.gui.event.SaveVarbitEvent
 import scape.editor.gui.model.KeyModel
 import scape.editor.gui.model.NamedValueModel
 import scape.editor.gui.model.ValueModel
 import scape.editor.gui.plugin.PluginManager
+import scape.editor.gui.plugin.extension.config.ConfigExtension
+import scape.editor.gui.util.FXDialogUtil
 import java.net.URL
 import java.util.*
 
-class VarbitController : BaseController() {
+class Controller : BaseController() {
 
     @FXML
     lateinit var listView: ListView<KeyModel>
@@ -67,7 +68,17 @@ class VarbitController : BaseController() {
 
         try {
             val archive = App.fs.getArchive(RSArchive.CONFIG_ARCHIVE)
-            PluginManager.post(LoadVarbitEvent(this.currentPlugin, archive, this.indexes))
+
+            val currentPlugin = this.currentPlugin
+
+            if (currentPlugin is ConfigExtension) {
+                try {
+                    currentPlugin.onLoad(indexes, archive)
+                } catch(ex: Exception) {
+                    ex.printStackTrace()
+                    FXDialogUtil.showException(ex)
+                }
+            }
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -88,8 +99,15 @@ class VarbitController : BaseController() {
         try {
             val archive = App.fs.getArchive(RSArchive.CONFIG_ARCHIVE)
             PluginManager.post(SaveVarbitEvent(this.currentPlugin, archive, this.indexes))
+
+            val currentPlugin = this.currentPlugin
+
+            if (currentPlugin is ConfigExtension) {
+                currentPlugin.onSave(indexes, archive)
+            }
         } catch (ex: Exception) {
             ex.printStackTrace()
+            FXDialogUtil.showException(ex)
         }
 
     }
